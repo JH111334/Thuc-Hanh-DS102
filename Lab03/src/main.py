@@ -1,9 +1,18 @@
 """
 Main entry-point — runs both assignments and prints the comparison table.
 
-Usage:
+Usage (from Lab03/ or Lab03/src/):
+    python src/main.py
     python main.py
 """
+
+import sys
+from pathlib import Path
+
+# Ensure sibling modules are importable regardless of working directory
+_SRC_DIR = Path(__file__).resolve().parent
+if str(_SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(_SRC_DIR))
 
 import numpy as np
 import pandas as pd
@@ -16,7 +25,7 @@ np.random.seed(42)
 
 
 def main():
-    # ── Data loading (val merged into train) ─────────────────────────────
+    # ── Data loading ──────────────────────────────────────────────────────
     X_train, y_train, X_test, y_test = load_data()
 
     # ── Standardize ──────────────────────────────────────────────────────
