@@ -1,5 +1,5 @@
 """
-Assignment 2 — SVM using sklearn's LinearSVC.
+Bài tập 2 — SVM sử dụng LinearSVC của thư viện sklearn.
 """
 
 from sklearn.svm import LinearSVC
@@ -14,7 +14,7 @@ def train_sklearn_svm(
     max_iter: int = 8000,
     seed: int = 42,
 ) -> LinearSVC:
-    """Fit a LinearSVC on the training data and return the model."""
+    """Huấn luyện (fit) một LinearSVC trên dữ liệu train và trả về mô hình."""
     model = LinearSVC(
         C=C,
         loss="hinge",
@@ -27,7 +27,7 @@ def train_sklearn_svm(
 
 
 def evaluate(y_true, y_pred):
-    """Return a dict with Precision, Recall, and F1."""
+    """Trả về một dictionary chứa Precision, Recall, và F1."""
     return {
         "Precision": precision_score(y_true, y_pred, pos_label=1, zero_division=0),
         "Recall": recall_score(y_true, y_pred, pos_label=1, zero_division=0),

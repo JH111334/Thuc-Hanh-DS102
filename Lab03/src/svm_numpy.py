@@ -1,5 +1,5 @@
 """
-Assignment 1 — NumPy Soft-margin SVM trained with Mini-batch SGD.
+Bài tập 1 — Soft-margin SVM bằng NumPy được huấn luyện với Mini-batch SGD.
 """
 
 import numpy as np
@@ -7,7 +7,7 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 
 
 def standardize(X_train, X_test):
-    """Zero-mean, unit-variance standardization fitted on train."""
+    """Chuẩn hóa dữ liệu với trung bình bằng 0, phương sai bằng 1 được khớp (fit) trên tập train."""
     mean = X_train.mean(axis=0, keepdims=True)
     std = X_train.std(axis=0, keepdims=True) + 1e-8
     return (X_train - mean) / std, (X_test - mean) / std
@@ -21,12 +21,12 @@ def train_svm(
     epochs: int = 8,
     seed: int = 42,
 ):
-    """Train a soft-margin SVM with full-batch gradient descent.
+    """Huấn luyện soft-margin SVM với full-batch gradient descent.
 
-    Returns
+    Trả về
     -------
-    w : np.ndarray   – weight vector
-    b : float        – bias
+    w : np.ndarray   – vector trọng số
+    b : float        – độ lệch (bias)
     """
     rng = np.random.default_rng(seed)
     n_samples, n_features = X_train.shape
@@ -54,12 +54,12 @@ def train_svm(
 
 
 def predict(X, w, b):
-    """Return predictions in {-1, +1}."""
+    """Trả về các dự đoán thuộc {-1, +1}."""
     return np.where((X @ w + b) >= 0.0, 1, -1).astype(np.int32)
 
 
 def evaluate(y_true, y_pred):
-    """Return a dict with Precision, Recall, and F1."""
+    """Trả về một dictionary chứa Precision, Recall, và F1."""
     return {
         "Precision": precision_score(y_true, y_pred, pos_label=1, zero_division=0),
         "Recall": recall_score(y_true, y_pred, pos_label=1, zero_division=0),

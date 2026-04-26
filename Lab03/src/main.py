@@ -1,7 +1,7 @@
 """
-Main entry-point — runs both assignments and prints the comparison table.
+Điểm bắt đầu chính (Main entry-point) — chạy cả hai bài tập và in bảng so sánh.
 
-Usage (from Lab03/ or Lab03/src/):
+Cách sử dụng (từ Lab03/ hoặc Lab03/src/):
     python src/main.py
     python main.py
 """
@@ -9,7 +9,7 @@ Usage (from Lab03/ or Lab03/src/):
 import sys
 from pathlib import Path
 
-# Ensure sibling modules are importable regardless of working directory
+# Đảm bảo các module cùng cấp (sibling) có thể import được bất kể thư mục làm việc hiện tại
 _SRC_DIR = Path(__file__).resolve().parent
 if str(_SRC_DIR) not in sys.path:
     sys.path.insert(0, str(_SRC_DIR))
@@ -25,13 +25,13 @@ np.random.seed(42)
 
 
 def main():
-    # ── Data loading ──────────────────────────────────────────────────────
+    # ── Tải dữ liệu ──────────────────────────────────────────────────────
     X_train, y_train, X_test, y_test = load_data()
 
-    # ── Standardize ──────────────────────────────────────────────────────
+    # ── Chuẩn hóa ──────────────────────────────────────────────────────
     X_train_std, X_test_std = standardize(X_train, X_test)
 
-    # ── Assignment 1: NumPy Soft-margin SVM ──────────────────────────────
+    # ── Bài tập 1: Soft-margin SVM bằng NumPy ──────────────────────────────
     print("\n=== Assignment 1 — NumPy Soft-margin SVM ===")
     w, b = train_svm(X_train_std, y_train)
     y_pred_np = predict(X_test_std, w, b)
@@ -42,7 +42,7 @@ def main():
     print(f"Recall   : {metrics_np['Recall']:.4f}")
     print(f"F1-score : {metrics_np['F1']:.4f}")
 
-    # ── Assignment 2: Sklearn LinearSVC ──────────────────────────────────
+    # ── Bài tập 2: LinearSVC của Sklearn ──────────────────────────────────
     print("\n=== Assignment 2 — Sklearn LinearSVC ===")
     model = train_sklearn_svm(X_train_std, y_train)
     y_pred_sk = model.predict(X_test_std)
@@ -53,7 +53,7 @@ def main():
     print(f"Recall   : {metrics_sk['Recall']:.4f}")
     print(f"F1-score : {metrics_sk['F1']:.4f}")
 
-    # ── Comparison table ─────────────────────────────────────────────────
+    # ── Bảng so sánh ─────────────────────────────────────────────────
     print("\n=== Comparison ===")
     comparison_df = pd.DataFrame(
         [
